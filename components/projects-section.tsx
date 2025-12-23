@@ -26,7 +26,8 @@ const projects = [
       "/porfolio-images/PramoolQuick/2.png",
     ],
     theme: "light",
-    color: "bg-blue-50 dark:bg-slate-900"
+    color: "bg-blue-50 dark:bg-slate-900",
+    url: "https://chromewebstore.google.com/detail/pramool-quick/mhhpcbegifmfmbcbnopdcmbagdbgnpdc?hl=th"
   },
   {
     title: "Pramool Quick Web",
@@ -41,7 +42,8 @@ const projects = [
       "/porfolio-images/PramoolQuick/9.png",
     ],
     theme: "light",
-    color: "bg-indigo-50 dark:bg-slate-900"
+    color: "bg-indigo-50 dark:bg-slate-900",
+    url: "https://www.pramoolquick.com/"
   },
   {
     title: "Summer Car Rent",
@@ -103,7 +105,7 @@ const projects = [
   }
 ]
 
-function ProjectRow({ project, index }: { project: typeof projects[0], index: number }) {
+function ProjectRow({ project, index }: { project: typeof projects[0] & { url?: string }, index: number }) {
   const isEven = index % 2 === 0
   const ref = useRef(null)
   const { scrollYProgress } = useScroll({
@@ -148,9 +150,13 @@ function ProjectRow({ project, index }: { project: typeof projects[0], index: nu
             </p>
           </div>
 
-          <Button size="lg" className="rounded-full px-8 text-base bg-slate-900 text-white hover:bg-slate-800 dark:bg-white dark:text-black dark:hover:bg-slate-200">
-            View Case Study <ArrowUpRight className="ml-2 h-4 w-4" />
-          </Button>
+          {project.url && (
+            <Button size="lg" asChild className="rounded-full px-8 text-base bg-slate-900 text-white hover:bg-slate-800 dark:bg-white dark:text-black dark:hover:bg-slate-200">
+              <a href={project.url} target="_blank" rel="noopener noreferrer">
+                View Case Study <ArrowUpRight className="ml-2 h-4 w-4" />
+              </a>
+            </Button>
+          )}
         </div>
 
         {/* Image Side - Carousel */}

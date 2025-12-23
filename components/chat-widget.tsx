@@ -9,6 +9,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { MessageCircle, X, Send, User, Bot, Loader2 } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
+import ReactMarkdown from "react-markdown"
 
 export function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false)
@@ -24,6 +25,22 @@ export function ChatWidget() {
     }
   }, [messages, isOpen])
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const getCookie = (name: string) => {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop()?.split(';').shift();
+      }
+
+      let id = getCookie('chat_user_id');
+      if (!id) {
+        id = crypto.randomUUID();
+        document.cookie = `chat_user_id=${id}; path=/; max-age=31536000; SameSite=Lax`;
+      }
+    }
+  }, []);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value)
   }
@@ -31,8 +48,9 @@ export function ChatWidget() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!input.trim()) return
-    await sendMessage({ role: 'user', content: input } as any)
+    const messageContent = input
     setInput("")
+    await sendMessage({ role: 'user', content: messageContent } as any)
   }
 
   return (
@@ -94,11 +112,22 @@ export function ChatWidget() {
                             : "bg-white/50 dark:bg-slate-800/50 border border-slate-200/50 dark:border-slate-700/50"
                             }`}
                         >
-                          {m.content}
-                          {!m.content && m.parts && m.parts.map((part: any, i: number) => {
-                            if (part.type === 'text') return <span key={i}>{part.text}</span>
+                          {m.content ? (
+                            <div className="prose dark:prose-invert text-sm break-words leading-relaxed [&>ul]:list-disc [&>ul]:pl-4 [&>ul]:mb-2 [&>p]:mb-2 last:[&>p]:mb-0 [&>strong]:font-bold text-left">
+                              <ReactMarkdown>
+                                {m.content}
+                              </ReactMarkdown>
+                            </div>
+                          ) : m.parts ? m.parts.map((part: any, i: number) => {
+                            if (part.type === 'text') return (
+                              <div key={i} className="prose dark:prose-invert text-sm break-words leading-relaxed [&>ul]:list-disc [&>ul]:pl-4 [&>p]:mb-2 last:[&>p]:mb-0 text-left">
+                                <ReactMarkdown>
+                                  {part.text}
+                                </ReactMarkdown>
+                              </div>
+                            )
                             return null
-                          })}
+                          }) : null}
                         </div>
                       </div>
                     ))}
