@@ -10,13 +10,26 @@ import {
   Mail,
   Linkedin,
   Github,
-  Monitor
+  Monitor,
+  Sun,
+  Moon
 } from "lucide-react"
 import { useTheme } from "next-themes"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  const cycleTheme = () => {
+    if (theme === "system") setTheme("light")
+    else if (theme === "light") setTheme("dark")
+    else setTheme("system")
+  }
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-background text-foreground transition-colors duration-300">
@@ -61,12 +74,24 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             </DockIcon>
             {/* Divider or spacer could be added here */}
 
-            <DockIcon onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+            <DockIcon onClick={cycleTheme}>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Monitor className="h-6 w-6 text-slate-700 dark:text-slate-200" />
+                  <div className="flex items-center justify-center w-full h-full cursor-pointer">
+                    {!mounted ? (
+                      <Monitor className="h-6 w-6 text-slate-700 dark:text-slate-200" />
+                    ) : theme === 'light' ? (
+                      <Sun className="h-6 w-6 text-slate-700 dark:text-slate-200" />
+                    ) : theme === 'dark' ? (
+                      <Moon className="h-6 w-6 text-slate-700 dark:text-slate-200" />
+                    ) : (
+                      <Monitor className="h-6 w-6 text-slate-700 dark:text-slate-200" />
+                    )}
+                  </div>
                 </TooltipTrigger>
-                <TooltipContent><p>Theme</p></TooltipContent>
+                <TooltipContent>
+                  <p>{!mounted ? "System" : theme === 'light' ? 'Light' : theme === 'dark' ? 'Dark' : 'System'}</p>
+                </TooltipContent>
               </Tooltip>
             </DockIcon>
           </Dock>
