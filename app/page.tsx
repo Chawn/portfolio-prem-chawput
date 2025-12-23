@@ -5,6 +5,8 @@ import { ProjectsSection } from "@/components/projects-section"
 import { SkillsSection } from "@/components/skills-section"
 
 import { ResumeSection } from "@/components/resume-section"
+import { ChatWidget } from "@/components/chat-widget"
+import InstagramSection from "../components/instagra-section"
 
 export default function Home() {
   return (
@@ -15,6 +17,7 @@ export default function Home() {
         <ExperienceSection />
         <ProjectsSection />
         <ResumeSection />
+        <ChatWidget />
 
         {/* Footer placeholder */}
         <footer className="py-12 text-center text-slate-500 text-sm">
