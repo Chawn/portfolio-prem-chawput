@@ -16,28 +16,38 @@ export async function POST(req: Request) {
 		return new Response('Unauthorized', { status: 401 });
 	}
 
+	// Get IP and User Agent
+	const ipAddress =
+		req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+		req.headers.get('x-real-ip') ||
+		'unknown';
+	const userAgent = req.headers.get('user-agent') || 'unknown';
+
 	const now = new Date();
 	const fiveHours = 5 * 60 * 60 * 1000;
 
-	// Check rate limit
-	const session = await prisma.chatSession.findUnique({
+	// Check rate limit and get/create session
+	let session = await prisma.chatSession.findUnique({
 		where: { fingerprint: userId },
 	});
 
 	if (!session) {
-		await prisma.chatSession.create({
+		session = await prisma.chatSession.create({
 			data: {
 				fingerprint: userId,
 				tokens: 29,
 				lastReset: now,
+				ipAddress,
+				userAgent,
 			},
 		});
 	} else {
+		// Update IP and UserAgent on each request
+		const updateData: any = { ipAddress, userAgent };
+
 		if (now.getTime() - session.lastReset.getTime() > fiveHours) {
-			await prisma.chatSession.update({
-				where: { id: session.id },
-				data: { tokens: 29, lastReset: now },
-			});
+			updateData.tokens = 29;
+			updateData.lastReset = now;
 		} else {
 			if (session.tokens <= 0) {
 				return new Response(
@@ -45,11 +55,31 @@ export async function POST(req: Request) {
 					{ status: 429 }
 				);
 			}
-			await prisma.chatSession.update({
-				where: { id: session.id },
-				data: { tokens: { decrement: 1 } },
-			});
+			updateData.tokens = { decrement: 1 };
 		}
+
+		session = await prisma.chatSession.update({
+			where: { id: session.id },
+			data: updateData,
+		});
+	}
+
+	// Get the last user message to log
+	const lastUserMessage = messages[messages.length - 1];
+	const userMessageContent =
+		lastUserMessage?.content ||
+		lastUserMessage?.parts?.map((p: any) => p.text).join('') ||
+		'';
+
+	// Log user message
+	if (userMessageContent && lastUserMessage?.role === 'user') {
+		await prisma.chatLog.create({
+			data: {
+				sessionId: session.id,
+				role: 'user',
+				content: userMessageContent,
+			},
+		});
 	}
 	// Persona Data from User
 	const systemPrompt = `
@@ -74,7 +104,7 @@ Tone: Professional, confident, yet approached and friendly. INTJ personality (lo
 **Experience:**
 - **5+ Years** in Software Development.
 - **Hybiot Co., Ltd. (Team Lead & Front-End Developer, Mar 2023 - Jul 2025)**:
-  - Led a team of 5 developers, setting strict code quality rules.
+  - Lead a team of 5 developers, setting strict code quality rules.
   - Developed an Enterprise Security System with real-time CCTV streaming, geospatial mapping, and complicated RBAC.
   - Mentored junior developers on React/TypeScript best practices.
 - **Key Turning Point**: Left tech briefly to manage family business "Ban Phue Salt" (GMP, Factory Design, Process Improvement) for 5-6 months. This gave me strong business acumen and on-site problem solving skills.
@@ -152,6 +182,18 @@ Tone: Professional, confident, yet approached and friendly. INTJ personality (lo
 			role: m.role,
 			content: m.content || m.parts?.map((p: any) => p.text).join('') || '',
 		})),
+		onFinish: async ({ text }) => {
+			// Log AI response after streaming completes
+			if (text) {
+				await prisma.chatLog.create({
+					data: {
+						sessionId: session.id,
+						role: 'assistant',
+						content: text,
+					},
+				});
+			}
+		},
 	});
 
 	return result.toUIMessageStreamResponse();

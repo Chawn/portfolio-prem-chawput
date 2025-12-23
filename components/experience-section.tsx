@@ -10,7 +10,7 @@ const fullTimeExperiences = [
     role: "Team Lead & Front-End Developer",
     period: "March 2023 - July 2025",
     description: [
-      "Led a team of 5 developers, setting strict code quality rules and conducting daily reviews.",
+      "Lead a team of 5 developers, setting strict code quality rules and conducting daily reviews.",
       "Developed an Enterprise Security System with real-time CCTV streaming, geospatial mapping, and complex RBAC.",
       "Mentored junior developers on React/TypeScript best practices."
     ],

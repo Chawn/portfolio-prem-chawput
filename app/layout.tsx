@@ -7,6 +7,9 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 export const metadata: Metadata = {
   title: "Chawput | Full Stack Developer",
   description: "Portfolio of Chawput Nawakalanu",
+  icons: {
+    icon: "/profile2.jpg",
+  },
 };
 
 import { ThemeProvider } from "@/components/theme-provider"
