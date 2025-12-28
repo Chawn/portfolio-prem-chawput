@@ -16,7 +16,7 @@ export default function Home() {
         <SkillsSection />
         <ExperienceSection />
         <ProjectsSection />
-        <ResumeSection />
+        {/* <ResumeSection /> */}
         <ChatWidget />
 
         {/* Footer placeholder */}

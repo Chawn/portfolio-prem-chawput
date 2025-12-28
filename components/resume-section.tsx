@@ -21,7 +21,7 @@ export function ResumeSection() {
 
         <div className="relative w-full aspect-[210/297] rounded-xl overflow-hidden shadow-2xl border border-slate-200/20 bg-white/5">
           <Image
-            src="/Chawput'sResumeNew.png"
+            src="/ChawputResume.png"
             alt="Chawput Nawakalanu Resume"
             fill
             className="object-contain"
@@ -31,7 +31,7 @@ export function ResumeSection() {
         </div>
 
         <Button asChild size="lg" className="rounded-full gap-2 px-8 shadow-xl bg-indigo-600 hover:bg-indigo-700 text-white border-0 h-12 text-lg">
-          <a href="/Chawput'sResume.pdf" download="Chawput_Nawakalanu_Resume.pdf">
+          <a href="/ChawputResume.pdf" download="Chawput_Nawakalanu_Resume.pdf">
             <Download className="h-5 w-5" /> Download Resume PDF
           </a>
         </Button>
