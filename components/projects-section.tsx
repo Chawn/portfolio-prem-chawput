@@ -84,8 +84,8 @@ const projects = [
     description: "High-performance dashboard for massive real-time CCTV streaming and geospatial mapping. Implemented complex Role-Based Access Control (RBAC) ensuring secure multi-level permissions.",
     logo: "/porfolio-images/Hybiot/logo.png",
     screenshots: [
-      "/porfolio-images/Hybiot/34.png",
-      "/porfolio-images/Hybiot/35.png",
+      "/porfolio-images/Hybiot/30.png",
+      "/porfolio-images/Hybiot/31.png",
     ],
     theme: "light",
     color: "bg-cyan-50 dark:bg-slate-900"
@@ -102,6 +102,30 @@ const projects = [
     ],
     theme: "light",
     color: "bg-pink-50 dark:bg-slate-900"
+  },
+  {
+    title: "The Bizarre Island",
+    category: "Food Ordering Platform",
+    description: "A LINE OA-integrated food ordering web app enabling dine-in and delivery orders. Features real-time order status tracking via WebSocket, automated backend order management, and seamless customer experience.",
+    logo: "/porfolio-images/TheBizarreIsland/logo.png",
+    screenshots: [
+      "/porfolio-images/TheBizarreIsland/bz1.png",
+      "/porfolio-images/TheBizarreIsland/bz2.png",
+      "/porfolio-images/TheBizarreIsland/bz3.png",
+      "/porfolio-images/TheBizarreIsland/bz4.png",
+      "/porfolio-images/TheBizarreIsland/bz5.png",
+      "/porfolio-images/TheBizarreIsland/bz6.png",
+      "/porfolio-images/TheBizarreIsland/bz7.png",
+      "/porfolio-images/TheBizarreIsland/bz8.png",
+      "/porfolio-images/TheBizarreIsland/bz9.png",
+      "/porfolio-images/TheBizarreIsland/bz10.png",
+      "/porfolio-images/TheBizarreIsland/bz11.png",
+      "/porfolio-images/TheBizarreIsland/bz12.png",
+      "/porfolio-images/TheBizarreIsland/bz13.png",
+    ],
+    theme: "light",
+    color: "bg-purple-50 dark:bg-slate-900",
+    aspectRatio: "9/16" // Mobile portrait screenshots
   }
 ]
 
@@ -160,8 +184,17 @@ function ProjectRow({ project, index }: { project: typeof projects[0] & { url?: 
         </div>
 
         {/* Image Side - Carousel */}
-        <div className="flex-1 lg:flex-[1.2] w-full">
-          <motion.div style={{ y }} className="relative aspect-[16/10] w-full rounded-2xl shadow-2xl overflow-hidden border-8 border-white/20 dark:border-white/5 bg-slate-900">
+        <div className={cn(
+          "flex-1 w-full",
+          project.aspectRatio === "9/16" ? "lg:flex-[0.6] max-w-md mx-auto" : "lg:flex-[1.2]"
+        )}>
+          <motion.div
+            style={{ y }}
+            className={cn(
+              "relative w-full rounded-2xl shadow-2xl overflow-hidden border-8 border-white/20 dark:border-white/5 bg-slate-900",
+              project.aspectRatio === "9/16" ? "aspect-[9/16]" : "aspect-[16/10]"
+            )}
+          >
             <Carousel className="w-full h-full" opts={{ loop: true }}>
               <CarouselContent className="h-full">
                 {project.screenshots.map((src, i) => (
