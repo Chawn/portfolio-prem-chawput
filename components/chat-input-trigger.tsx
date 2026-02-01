@@ -90,7 +90,7 @@ export function ChatInputTrigger() {
         transition={{ delay: 0.8 }}
         className="text-center text-xs md:text-sm text-slate-500 mt-3 font-medium"
       >
-        Try asking me about my projects or schedule a call!
+        Try asking me about my projects, skills or any other topic!
       </motion.p>
     </motion.div>
   )
