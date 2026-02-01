@@ -120,8 +120,6 @@ const projects = [
       "/porfolio-images/TheBizarreIsland/bz9.png",
       "/porfolio-images/TheBizarreIsland/bz10.png",
       "/porfolio-images/TheBizarreIsland/bz11.png",
-      "/porfolio-images/TheBizarreIsland/bz12.png",
-      "/porfolio-images/TheBizarreIsland/bz13.png",
     ],
     theme: "light",
     color: "bg-purple-50 dark:bg-slate-900",

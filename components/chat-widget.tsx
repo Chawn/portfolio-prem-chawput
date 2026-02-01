@@ -1,5 +1,7 @@
 "use client"
 
+import { useChatContext } from "@/context/chat-context"
+
 import { useChat } from "@ai-sdk/react"
 import { useState, useRef, useEffect } from "react"
 import { Button } from "@/components/ui/button"
@@ -12,12 +14,25 @@ import { motion, AnimatePresence } from "framer-motion"
 import ReactMarkdown from "react-markdown"
 
 export function ChatWidget() {
-  const [isOpen, setIsOpen] = useState(false)
+  /* REMOVED: const [isOpen, setIsOpen] = useState(false) */
+  const { isOpen, setIsOpen, initialMessage, setInitialMessage } = useChatContext()
   const { messages, sendMessage, status, error } = useChat()
   const [input, setInput] = useState("")
   const scrollRef = useRef<HTMLDivElement>(null)
 
   const isLoading = status === "submitted" || status === "streaming"
+
+  // Auto-send initial message if present when chat opens
+  useEffect(() => {
+    if (isOpen && initialMessage) {
+      // Small delay to ensure UI is ready
+      const timer = setTimeout(() => {
+        sendMessage({ role: 'user', content: initialMessage } as any)
+        setInitialMessage("") // Clear it so it doesn't send again
+      }, 500)
+      return () => clearTimeout(timer)
+    }
+  }, [isOpen, initialMessage, sendMessage, setInitialMessage])
 
   useEffect(() => {
     if (scrollRef.current) {

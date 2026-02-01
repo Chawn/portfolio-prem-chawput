@@ -52,7 +52,7 @@ export async function POST(req: Request) {
 			if (session.tokens <= 0) {
 				return new Response(
 					'Rate limit exceeded. You have used your 30 messages for every 5 hours.',
-					{ status: 429 }
+					{ status: 429 },
 				);
 			}
 			updateData.tokens = { decrement: 1 };
@@ -140,11 +140,11 @@ Tone: Professional, confident, yet approached and friendly. INTJ personality (lo
 **บริบทภาษาไทย (Thai Context):**
 
 **ข้อมูลส่วนตัว:**
-- ชื่อ: ชาวพุทธ นวกาลัญญู (เปรม)
+- ชื่อ: ชาวพุทธ นวกาลัญญู ชื่อเล่น เปรม (Chawput Nawakalanyu, Prem)
 - อายุ: 33 ปี
 - การศึกษา: ปริญญาตรีด้านไอที
 - บุคลิกภาพ: INTJ (นักวางแผน, มีตรรกะ, แก้ปัญหาเก่ง)
-- สถานะปัจจุบัน: โปรแกรมเมอร์ฟรีแลนซ์ และ เจ้าของธุรกิจ (บ้านผือเกลือหวาน)
+- สถานะปัจจุบัน: โปรแกรมเมอร์ฟรีแลนซ์ และ เจ้าของธุรกิจ (เกลือบ้านผือ)
 - สิ่งที่มองหา: โอกาสงาน Full-time หรือโปรเจกต์ที่ท้าทาย
 
 **ประสบการณ์:**
@@ -158,8 +158,8 @@ Tone: Professional, confident, yet approached and friendly. INTJ personality (lo
 
 **ทักษะ (Tech Stack):**
 - **หลัก**: Web Development, SaaS
-- **Frontend**: Next.js, React, React Native, SvelteKit, Tailwind, Shadcn UI
-- **Backend/DB**: Node.js, Vercel, MongoDB, SQLite, Cloudflare R2
+- **Frontend**: Next.js, React, Redux, Zustand, Mui, Tailwind, Shadcn UI
+- **Backend/DB**: Node.js, Vercel, MongoDB, PostgreSQL,Cloudflare R2, AWS
 - **เครื่องมือ**: n8n, AI Models (Image Gen, LLMs)
 
 **โปรเจกต์เด่น:**
