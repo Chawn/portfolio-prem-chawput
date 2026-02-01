@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge"
 const fullTimeExperiences = [
   {
     company: "Hybiot Co., Ltd.",
-    role: "Front-End Developer & Team Lead",
+    role: "Team Lead & Front-End Developer",
     period: "March 2023 - July 2025",
     description: [
       "Lead a team of 5 developers, setting strict code quality rules and conducting daily reviews.",
@@ -18,22 +18,23 @@ const fullTimeExperiences = [
   },
   {
     company: "Pramool Quick",
-    role: "Founder & Full-Stack Developer",
+    role: "Founder & Full Stack Developer",
     period: "January 2020 - Present",
     description: [
       "Developed a Chrome extension for real estate auction scraping with advanced filters.",
       "Architected a B2C SaaS platform for property management with membership lifecycle logic."
     ],
-    tech: ["Chrome Extension", "SaaS", "Full-Stack"]
+    tech: ["Chrome Extension", "SaaS", "Full Stack"]
   },
   {
     company: "Mubaza",
-    role: "Full-Stack Developer",
+    role: "Co-Founder & Developer",
     period: "Dec 2014 - Sep 2016",
     description: [
+      "Co-founded a Tech Startup with a team of 3 developers.",
       "Built an E-Commerce platform featuring a custom interactive clothing design tool."
     ],
-    tech: ["E-Commerce"]
+    tech: ["Startup", "E-Commerce"]
   },
   {
     company: "True Information Technology",
