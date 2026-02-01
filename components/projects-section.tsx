@@ -13,6 +13,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
+import { Badge } from "@/components/ui/badge"
 
 const projects = [
   {
@@ -27,7 +28,9 @@ const projects = [
     ],
     theme: "light",
     color: "bg-blue-50 dark:bg-slate-900",
-    url: "https://chromewebstore.google.com/detail/pramool-quick/mhhpcbegifmfmbcbnopdcmbagdbgnpdc?hl=th"
+    url: "https://chromewebstore.google.com/detail/pramool-quick/mhhpcbegifmfmbcbnopdcmbagdbgnpdc?hl=th",
+    role: "Founder & Full Stack Developer",
+    techStack: ["JavaScript", "jQuery", "Bootstrap", "Chrome Extension API", "HTML", "CSS"]
   },
   {
     title: "Pramool Quick Web",
@@ -43,7 +46,9 @@ const projects = [
     ],
     theme: "light",
     color: "bg-indigo-50 dark:bg-slate-900",
-    url: "https://www.pramoolquick.com/"
+    url: "https://www.pramoolquick.com/",
+    role: "Founder & Full Stack Developer",
+    techStack: ["Next.js", "Node.js", "Express.js", "MongoDB", "Tailwind CSS", "Shadcn UI", "Cloudflare R2", "Python"]
   },
   {
     title: "Summer Car Rent",
@@ -58,7 +63,9 @@ const projects = [
       "/porfolio-images/SummerCarrent/29.png",
     ],
     theme: "light",
-    color: "bg-orange-50 dark:bg-slate-900"
+    color: "bg-orange-50 dark:bg-slate-900",
+    role: "Full Stack Developer",
+    techStack: ["Next.js", "Tailwind CSS", "Mui", "PostgreSQL", "Prisma", "AWS"]
   },
   {
     title: "Banphue Salt POS",
@@ -76,7 +83,9 @@ const projects = [
       "/porfolio-images/BPSaltPOS/43.png",
     ],
     theme: "light",
-    color: "bg-emerald-50 dark:bg-slate-900"
+    color: "bg-emerald-50 dark:bg-slate-900",
+    role: "System Architect & Developer",
+    techStack: ["Next.js", "Tailwind CSS", "Mui", "MongoDB",]
   },
   {
     title: "Hybiot Legacy",
@@ -88,7 +97,9 @@ const projects = [
       "/porfolio-images/Hybiot/31.png",
     ],
     theme: "light",
-    color: "bg-cyan-50 dark:bg-slate-900"
+    color: "bg-cyan-50 dark:bg-slate-900",
+    role: "Team Lead & Front-End Developer",
+    techStack: ["React", "Zustand", "Mui", "Tailwind CSS"]
   },
   {
     title: "Mubaza",
@@ -101,7 +112,9 @@ const projects = [
       "/porfolio-images/Mubaza/58.jpg",
     ],
     theme: "light",
-    color: "bg-pink-50 dark:bg-slate-900"
+    color: "bg-pink-50 dark:bg-slate-900",
+    role: "Co-Founder & Developer",
+    techStack: ["JavaScript", "HTML", "CSS", "PHP", "Laravel", "jQuery"]
   },
   {
     title: "The Bizarre Island",
@@ -123,7 +136,9 @@ const projects = [
     ],
     theme: "light",
     color: "bg-purple-50 dark:bg-slate-900",
-    aspectRatio: "9/16" // Mobile portrait screenshots
+    aspectRatio: "9/16", // Mobile portrait screenshots
+    role: "Full Stack Developer",
+    techStack: ["LINE LIFF", "React", "WebSocket", "Tailwind CSS", "Mui"]
   }
 ]
 
@@ -164,12 +179,25 @@ function ProjectRow({ project, index }: { project: typeof projects[0] & { url?: 
           </div>
 
           <div>
+            <div className="mb-2">
+              <span className={cn("text-sm font-semibold tracking-wide uppercase", project.theme === 'dark' ? "text-indigo-400" : "text-indigo-600 dark:text-indigo-400")}>
+                {project.role}
+              </span>
+            </div>
             <h3 className={cn("text-4xl md:text-6xl font-black tracking-tighter mb-4", project.theme === 'dark' ? "text-white" : "text-slate-900 dark:text-white")}>
               {project.title}
             </h3>
             <p className={cn("text-lg md:text-xl leading-relaxed max-w-xl", project.theme === 'dark' ? "text-slate-300" : "text-slate-600 dark:text-slate-300")}>
               {project.description}
             </p>
+
+            <div className="flex flex-wrap gap-2 mt-6 justify-center md:justify-start">
+              {project.techStack.map((tech) => (
+                <Badge key={tech} variant="secondary" className="bg-white/50 dark:bg-white/10 hover:bg-white/80 dark:hover:bg-white/20 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700">
+                  {tech}
+                </Badge>
+              ))}
+            </div>
           </div>
 
           {project.url && (
