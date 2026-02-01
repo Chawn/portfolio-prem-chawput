@@ -4,9 +4,14 @@ import { motion } from "framer-motion"
 import { GlassCard } from "@/components/ui/glass-card"
 
 const skills = [
-  { category: "Frontend", items: ["TypeScript", "React", "Next.js", "Redux", "Zustand", "TanStack", "Tailwind CSS", "Shadcn UI", "MUI", "Ant Design", "Playwright", "ESLint", "Prettier"] },
-  { category: "Backend", items: ["Node.js", "Python", "PHP", "Express", "PostgreSQL", "MongoDB", "SQLite", "Prisma", "REST", "JWT", "Cloudflare R2"] },
-  { category: "Tools & Others", items: ["Git", "Docker", "Webpack", "Babel", "Figma", "Jira", "AI-Assisted Development"] }
+  { category: "Languages", items: ["TypeScript", "JavaScript", "Python", "PHP", "SQL"] },
+  { category: "Frontend", items: ["React", "Next.js", "Zustand", "TanStack Query", "Tailwind CSS", "Shadcn UI", "MUI", "Ant Design"] },
+  { category: "Backend", items: ["Node.js", "Express", "Prisma ORM", "REST API"] },
+  { category: "Database", items: ["PostgreSQL", "MongoDB", "SQLite", "MySQL"] },
+  { category: "DevOps & Cloud", items: ["Docker", "AWS Amplify", "Vercel", "Railway", "Cloudflare R2", "CI/CD Concepts"] },
+  { category: "Testing & Quality", items: ["Playwright", "ESLint", "Prettier"] },
+  { category: "Tools", items: ["Git", "Figma", "Jira"] },
+  { category: "AI", items: ["n8n", "Make", "OpenClaw (Clawdbot)", "AI Integration"] }
 ]
 
 export function SkillsSection() {
@@ -15,7 +20,7 @@ export function SkillsSection() {
       <h2 className="text-3xl md:text-5xl font-bold mb-12 text-center tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-slate-900 to-slate-500 dark:from-white dark:to-slate-400">
         Technical Proficiency
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {skills.map((skillGroup, index) => (
           <motion.div
             key={index}
