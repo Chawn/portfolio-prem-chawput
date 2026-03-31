@@ -4,14 +4,14 @@ import { motion } from "framer-motion"
 import { GlassCard } from "@/components/ui/glass-card"
 
 const skills = [
-  { category: "Languages", items: ["TypeScript", "JavaScript", "Python", "PHP", "SQL"] },
-  { category: "Frontend", items: ["React", "Next.js", "Zustand", "TanStack Query", "Tailwind CSS", "Shadcn UI", "MUI", "Ant Design"] },
-  { category: "Backend", items: ["Node.js", "Express", "Prisma ORM", "REST API"] },
-  { category: "Database", items: ["PostgreSQL", "MongoDB", "SQLite", "MySQL"] },
-  { category: "DevOps & Cloud", items: ["Docker", "AWS Amplify", "Vercel", "Railway", "Cloudflare R2", "CI/CD Concepts"] },
-  { category: "Testing & Quality", items: ["Playwright", "ESLint", "Prettier"] },
-  { category: "Tools", items: ["Git", "Figma", "Jira"] },
-  { category: "AI", items: ["n8n", "Make", "OpenClaw (Clawdbot)", "AI Integration"] }
+  { category: "Front-End", items: ["React", "Next.js", "TypeScript", "Zustand", "React Hook Form", "Zod", "Tailwind CSS", "SASS", "MUI", "Ant Design", "Shadcn/ui"] },
+  { category: "Back-End", items: ["Node.js", "Express", "Golang", "PHP", "Laravel", "Python", "Prisma"] },
+  { category: "Mobile", items: ["Flutter (iOS & Android)"] },
+  { category: "Database", items: ["PostgreSQL", "MySQL", "MSSQL", "MongoDB", "Kafka", "MinIO", "Cloudflare R2"] },
+  { category: "Testing", items: ["Playwright", "Jest", "Cypress"] },
+  { category: "DevOps", items: ["Git", "Docker", "Vercel", "Railway", "AWS Amplify", "Cloudflare", "CI/CD"] },
+  { category: "Tools", items: ["Webpack", "Babel", "Stitch", "Jira"] },
+  { category: "Practices", items: ["Agile / Scrum", "Code Review", "TDD", "REST API Design", "Frontend Architecture", "Team Leadership"] },
 ]
 
 export function SkillsSection() {
